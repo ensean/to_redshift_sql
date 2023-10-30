@@ -1,5 +1,4 @@
 import os
-import sqlparse
 from odps import ODPS
 
 
@@ -36,7 +35,11 @@ FIELD_MAP = {
 }
 
 def get_redshift_type(map_file,src_type):
-    return map_file.get(src_type.upper(), None)
+    #  适配 VARCHAR、DECIMAL 参数
+    if 'VARCHAR' in src_type.upper() or 'DECIMAL' in src_type.upper():
+        return src_type
+    else:
+        return map_file.get(src_type.upper(), None)
 
 def is_partition(col):
     # partion or field
@@ -68,7 +71,9 @@ def construct_redshift_create_sql(schema, table):
     final_sql = PREFIX + "%s.%s " % (schema, table_name)
     final_sql += "("
     for fld in splited_cols['fields']:
-        final_sql += "%s %s," % (fld.name, get_redshift_type(FIELD_MAP, fld.type.name))
+        field_def = "%s %s," % (fld.name, fld.type.name)
+        field_def = field_def.replace(fld.type.name, get_redshift_type(FIELD_MAP, fld.type.name))
+        final_sql += field_def
 
     #  将 MaxCompute 分区键添加为 Redshift 字段
     if len(splited_cols['splited_cols']) > 0:
