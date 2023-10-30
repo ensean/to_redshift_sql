@@ -1,0 +1,5 @@
+
+CREATE TABLE IF NOT EXISTS ods.bank_data (age INT8,job VARCHAR(65535),marital VARCHAR(65535),education VARCHAR(65535),credit VARCHAR(65535),housing VARCHAR(65535),loan VARCHAR(65535),contact VARCHAR(65535),month VARCHAR(65535),day_of_week VARCHAR(65535),duration VARCHAR(65535),campaign INT8,pdays FLOAT8,previous FLOAT8,poutcome VARCHAR(65535),emp_var_rate FLOAT8,cons_price_idx FLOAT8,cons_conf_idx FLOAT8,euribor3m FLOAT8,nr_employed FLOAT8,fixed_deposit INT8)
+CREATE TABLE IF NOT EXISTS ods.bank_data_pt (age INT8,job VARCHAR(65535),marital VARCHAR(65535),education VARCHAR(65535),housing VARCHAR(65535),loan VARCHAR(65535),contact VARCHAR(65535),month VARCHAR(65535),day_of_week VARCHAR(65535),duration VARCHAR(65535),campaign INT8,pdays FLOAT8,previous FLOAT8,poutcome VARCHAR(65535),emp_var_rate FLOAT8,cons_price_idx FLOAT8,cons_conf_idx FLOAT8,euribor3m FLOAT8,nr_employed FLOAT8,fixed_deposit INT8,credit VARCHAR(65535)) sortkey (credit)
+CREATE TABLE IF NOT EXISTS ods.result_table1 (education VARCHAR(65535),num INT8)
+CREATE TABLE IF NOT EXISTS ods.result_table2 (education VARCHAR(65535),num INT8,credit VARCHAR(65535))
